@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
 import Navbar from '@/components/navbar'
 import Hero from '@/components/hero'
 import About from '@/components/about'
@@ -8,13 +7,13 @@ import Projects from '@/components/projects'
 import Skills from '@/components/skills'
 import Education from '@/components/education'
 import Contact from '@/components/contact'
-import { useScrollAnimation } from '@/lib/useScrollAnimation'
+import { useReveal } from '@/lib/useReveal'
 
 export default function Home() {
-  useScrollAnimation()
+  useReveal()
 
   return (
-    <main className="overflow-hidden">
+    <main>
       <Navbar />
       <Hero />
       <About />

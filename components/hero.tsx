@@ -1,74 +1,217 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
-import { ChevronDown, ArrowRight } from 'lucide-react'
+import { useEffect, useRef } from 'react'
 
 export default function Hero() {
-  const [isScrolled, setIsScrolled] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    // CSS animation entrance — no GSAP dependency
+    const el = contentRef.current
+    if (!el) return
+    const children = Array.from(el.children) as HTMLElement[]
+    children.forEach((child, i) => {
+      child.style.opacity = '0'
+      child.style.transform = 'translateY(20px)'
+      child.style.transition = `opacity 0.75s ease ${200 + i * 150}ms, transform 0.75s ease ${200 + i * 150}ms`
+      // Force reflow then trigger
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          child.style.opacity = '1'
+          child.style.transform = 'translateY(0)'
+        })
+      })
+    })
   }, [])
 
   return (
-    <section className="relative min-h-screen bg-background flex items-center justify-center overflow-visible">
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center min-h-screen text-center">
-        {/* Main Card Container with overlapping image */}
-        <div className="relative w-full max-w-3xl overflow-visible">
-          {/* Large Grey Rectangle Box */}
-          <div className="relative bg-card/50 rounded-3xl border border-border/30 px-8 md:px-16 pt-56 md:pt-64 pb-16 md:pb-20 overflow-visible shadow-lg">
-            {/* Profile Photo Overlapping from Top */}
-            <div className="absolute -top-40 md:-top-48 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in">
-              <div className="relative w-64 h-72 md:w-80 md:h-96 rounded-3xl overflow-hidden bg-background border-4 border-background shadow-xl">
-                <Image
-                  src="/profile-nobg.png"
-                  alt="Karthick Raja E"
-                  fill
-                  className="object-contain object-bottom"
-                  priority
-                />
-              </div>
-            </div>
-
-            {/* Name with Accent - Inside the Box */}
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-foreground leading-tight tracking-tight">
-              <span className="text-accent">KARTHICK</span>
-              <br />
-              <span>RAJA E</span>
-            </h1>
-
-            {/* Subtitle - Inside the Box */}
-            <p className="text-base md:text-lg text-muted-foreground mb-10">
-              AI Engineer / Generative AI Specialist
-            </p>
-
-            {/* CTA Button - Inside the Box */}
-            <Link
-              href="#contact"
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-full border-2 border-foreground text-foreground hover:bg-foreground/10 transition-all duration-300 group font-medium"
-            >
-              Get in touch
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
+    <section
+      id="hero"
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        position: 'relative',
+        padding: '100px 32px 60px',
+        overflow: 'hidden',
+        background: '#000000',
+      }}
+    >
+      {/* Background Image */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: 0,
+        }}
+      >
+        <Image
+          src="/bg-image.png"
+          alt="Karthick Raja E"
+          fill
+          priority
+          style={{
+            objectFit: 'contain',
+            objectPosition: 'left center',
+            opacity: 0.9,
+          }}
+        />
+        {/* Right fade for text readability */}
         <div
-          className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-opacity duration-300 ${
-            isScrolled ? 'opacity-0' : 'opacity-100'
-          }`}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'linear-gradient(to right, rgba(0,0,0,0) 35%, rgba(0,0,0,0.85) 100%)',
+          }}
+        />
+      </div>
+
+      {/* Content */}
+      <div
+        ref={contentRef}
+        className="hero-content"
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          textAlign: 'right',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-end',
+          maxWidth: '680px',
+          width: '100%',
+          marginRight: '4%',
+        }}
+      >
+        {/* Role label */}
+        <p
+          style={{
+            fontSize: '0.75rem',
+            fontWeight: 600,
+            letterSpacing: '0.16em',
+            textTransform: 'uppercase',
+            color: 'rgba(255,255,255,0.4)',
+            marginBottom: 20,
+          }}
         >
-          <ChevronDown size={32} className="text-accent animate-bounce" />
+          AI Engineer · Generative AI Specialist
+        </p>
+
+        {/* Name */}
+        <h1
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontWeight: 800,
+            fontSize: 'clamp(3.5rem, 8vw, 7.5rem)',
+            textTransform: 'uppercase',
+            letterSpacing: '-0.03em',
+            lineHeight: 0.92,
+            color: 'white',
+            marginBottom: 28,
+          }}
+        >
+          KARTHICK
+          <br />
+          RAJA E
+        </h1>
+
+        {/* Tagline */}
+        <p
+          style={{
+            fontSize: 'clamp(0.9375rem, 2vw, 1.125rem)',
+            fontWeight: 400,
+            color: 'rgba(255,255,255,0.55)',
+            letterSpacing: '0.01em',
+            lineHeight: 1.7,
+            marginBottom: 40,
+            maxWidth: 360,
+          }}
+        >
+          Building intelligent systems at the intersection of AI and software engineering.
+        </p>
+
+        {/* CTA buttons */}
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+          <a href="#projects" className="btn-pill">
+            View Work <span className="arrow">→</span>
+          </a>
+          <a
+            href="mailto:e.karthickraja2004@gmail.com"
+            className="btn-pill"
+            style={{
+              background: 'rgba(255,255,255,0.08)',
+              borderColor: 'rgba(255,255,255,0.12)',
+            }}
+          >
+            Get in touch
+          </a>
         </div>
       </div>
+
+      {/* Scroll indicator */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 36,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 10,
+          zIndex: 1,
+        }}
+      >
+        <div
+          style={{
+            width: 26,
+            height: 42,
+            borderRadius: 13,
+            border: '1.5px solid rgba(255,255,255,0.15)',
+            display: 'flex',
+            alignItems: 'flex-start',
+            justifyContent: 'center',
+            padding: '6px 0',
+          }}
+        >
+          <div
+            style={{
+              width: 3,
+              height: 7,
+              borderRadius: 2,
+              background: 'rgba(255,255,255,0.35)',
+              animation: 'scrollDot 1.8s ease-in-out infinite',
+            }}
+          />
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes scrollDot {
+          0%, 100% { transform: translateY(0); opacity: 0.5; }
+          50% { transform: translateY(10px); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+          #hero {
+            align-items: flex-end !important;
+            justify-content: center !important;
+            padding-bottom: 120px !important;
+          }
+          #hero .hero-content {
+            text-align: center !important;
+            align-items: center !important;
+            margin-right: 0 !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

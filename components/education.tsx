@@ -1,95 +1,205 @@
 'use client'
 
-interface EducationItem {
-  type: string
-  institution: string
-  program: string
-  period: string
-  achievement: string
-}
+const certifications = [
+  { name: 'Data Science & ML Professional', issuer: 'Western State University' },
+  { name: 'Computer Vision', issuer: 'NPTEL' },
+  { name: 'GenAI Solution Development', issuer: 'Databricks' },
+  { name: 'GenAI-Powered Data Analytics', issuer: 'Tata Forage' },
+  { name: 'Blackbelt Program', issuer: 'Analytics Vidhya' },
+  { name: 'Python for Placement Readiness', issuer: 'ByteXL' },
+]
 
 export default function Education() {
-  const education: EducationItem[] = [
-    {
-      type: 'Degree',
-      institution: 'SNS College of Technology',
-      program: 'Bachelor of Technology in AI & ML',
-      period: '2022-2026',
-      achievement: 'CGPA: 8.81',
-    },
-    {
-      type: 'Higher Secondary',
-      institution: 'DSM Higher Secondary School',
-      program: 'HSE',
-      period: '2019-2022',
-      achievement: 'Percentage: 89%',
-    },
-  ]
-
-  const certifications = [
-    'Data Science & ML Professional – Western State University, California (Jul 2026)',
-    'Computer Vision (12-week course) - NPTEL (Jul – Oct 2024)',
-    'GenerativeAI Solution Development - Databricks (Oct 2025)',
-    'GenAI-Powered Data Analytics Job Simulation - Tata Forage (Jun 2025)',
-    'Blackbelt Program (ML & Analytics Track) - Analytics Vidhya (Oct - Dec 2025)',
-    'Python for Placement Readiness - ByteXL (Aug – Sep 2025)',
-  ]
-
   return (
-    <section className="py-20 md:py-28 px-6">
-      <div className="max-w-5xl mx-auto">
-        <div data-scroll-animate className="space-y-16">
-          <div className="space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground">Education & Certifications</h2>
-            <div className="w-12 h-1 bg-accent rounded-full"></div>
-          </div>
+    <section
+      id="education"
+      className="section section-alt"
+    >
+      <div className="container">
 
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-semibold text-foreground mb-6">Education</h3>
-              <div className="space-y-6">
-                {education.map((item, index) => (
-                  <div key={index} className="flex gap-6 group">
-                    <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 rounded-full bg-accent/20 border-2 border-accent flex items-center justify-center text-accent font-semibold text-sm">
-                        {item.type === 'Degree' ? '🎓' : '📚'}
-                      </div>
-                      {index < education.length - 1 && <div className="w-1 h-24 bg-border/50 my-2"></div>}
-                    </div>
+        {/* Section header */}
+        <div className="reveal" style={{ marginBottom: 64 }}>
+          <p className="section-overline" style={{ marginBottom: 18 }}>Background</p>
+          <h2 className="section-title">Education<br />&amp; Certs</h2>
+          <div className="divider" />
+        </div>
 
-                    <div className="pb-6 flex-1">
-                      <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-1">
-                        {item.type}
-                      </p>
-                      <h4 className="text-xl font-bold text-foreground mb-1">{item.institution}</h4>
-                      <p className="text-muted-foreground mb-2">{item.program}</p>
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm">
-                        <span className="text-muted-foreground">{item.period}</span>
-                        <span className="hidden sm:inline text-border">•</span>
-                        <span className="text-accent font-medium">{item.achievement}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+        {/* Two-column layout */}
+        <div
+          className="edu-grid"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '0 80px',
+            alignItems: 'start',
+          }}
+        >
+          {/* Left: Degree */}
+          <div className="reveal">
+            <p
+              style={{
+                fontSize: '0.6875rem',
+                fontWeight: 700,
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase',
+                color: 'var(--text-muted)',
+                marginBottom: 28,
+              }}
+            >
+              Degree
+            </p>
+
+            <div
+              className="card"
+              style={{ padding: '28px 28px 28px 28px', position: 'relative' }}
+            >
+              {/* Year badge */}
+              <span
+                style={{
+                  display: 'inline-block',
+                  fontSize: '0.75rem',
+                  fontWeight: 600,
+                  color: 'var(--text-muted)',
+                  letterSpacing: '0.06em',
+                  marginBottom: 14,
+                }}
+              >
+                2022 – 2026
+              </span>
+
+              <h3
+                style={{
+                  fontSize: '1.125rem',
+                  fontWeight: 700,
+                  color: 'var(--text-primary)',
+                  letterSpacing: '-0.01em',
+                  marginBottom: 8,
+                }}
+              >
+                SNS College of Technology
+              </h3>
+
+              <p
+                style={{
+                  fontSize: '0.9rem',
+                  color: 'var(--text-secondary)',
+                  marginBottom: 20,
+                  lineHeight: 1.6,
+                }}
+              >
+                B.Tech — Artificial Intelligence &amp; Machine Learning
+              </p>
+
+              {/* CGPA badge */}
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  padding: '6px 14px',
+                  borderRadius: 999,
+                  border: '1px solid var(--border)',
+                  background: 'rgba(255,255,255,0.03)',
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: '0.75rem',
+                    fontWeight: 600,
+                    color: 'var(--text-muted)',
+                    letterSpacing: '0.04em',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  CGPA
+                </span>
+                <span
+                  style={{
+                    fontSize: '1rem',
+                    fontWeight: 700,
+                    color: 'var(--text-primary)',
+                  }}
+                >
+                  8.81
+                </span>
               </div>
             </div>
+          </div>
 
-            <div>
-              <h3 className="text-2xl font-semibold text-foreground mb-6">Certifications</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {certifications.map((cert, index) => (
-                  <div
-                    key={index}
-                    className="p-4 rounded-lg border border-border/50 bg-card/40 hover:border-accent/50 hover:bg-card/60 transition-all duration-300"
-                  >
-                    <p className="text-sm text-muted-foreground">{cert}</p>
+          {/* Right: Certifications */}
+          <div className="reveal">
+            <p
+              style={{
+                fontSize: '0.6875rem',
+                fontWeight: 700,
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase',
+                color: 'var(--text-muted)',
+                marginBottom: 28,
+              }}
+            >
+              Certifications
+            </p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+              {certifications.map((cert, i) => (
+                <div
+                  key={cert.name}
+                  style={{
+                    padding: '16px 0',
+                    borderBottom: i < certifications.length - 1 ? '1px solid var(--border)' : 'none',
+                    display: 'grid',
+                    gridTemplateColumns: '1fr auto',
+                    alignItems: 'center',
+                    gap: 16,
+                  }}
+                >
+                  <div>
+                    <p
+                      style={{
+                        fontSize: '0.9375rem',
+                        fontWeight: 500,
+                        color: 'var(--text-secondary)',
+                        marginBottom: 3,
+                      }}
+                    >
+                      {cert.name}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: '0.75rem',
+                        color: 'var(--text-muted)',
+                        fontWeight: 500,
+                        letterSpacing: '0.04em',
+                      }}
+                    >
+                      {cert.issuer}
+                    </p>
                   </div>
-                ))}
-              </div>
+                  <span
+                    style={{
+                      fontSize: '0.75rem',
+                      color: 'var(--text-muted)',
+                    }}
+                  >
+                    →
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
+
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .edu-grid {
+            grid-template-columns: 1fr !important;
+            gap: 48px !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

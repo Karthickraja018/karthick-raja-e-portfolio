@@ -1,144 +1,244 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
-@import 'shadcn/tailwind.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-@custom-variant dark (&:is(.dark *));
-
-@theme inline {
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --color-foreground: var(--foreground);
-  --color-background: var(--background);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-}
+/* ============================================
+   KARTHICK RAJA E — Portfolio
+   Aesthetic: Precision Minimal Dark
+   ============================================ */
 
 :root {
-  color-scheme: dark;
-  --background: #0d0d0d;
-  --foreground: #f5f5f0;
-  --card: #1a1a1a;
-  --card-foreground: #f5f5f0;
-  --popover: #1a1a1a;
-  --popover-foreground: #f5f5f0;
-  --primary: #3b82f6;
-  --primary-foreground: #0d0d0d;
-  --secondary: #1f2937;
-  --secondary-foreground: #f5f5f0;
-  --muted: #374151;
-  --muted-foreground: #9ca3af;
-  --accent: #3b82f6;
-  --accent-foreground: #0d0d0d;
-  --destructive: #ef4444;
-  --border: #272727;
-  --input: #1a1a1a;
-  --ring: #3b82f6;
-  --chart-1: #3b82f6;
-  --chart-2: #1f2937;
-  --chart-3: #374151;
-  --chart-4: #4b5563;
-  --chart-5: #6b7280;
-  --radius: 0.625rem;
-  --sidebar: #1a1a1a;
-  --sidebar-foreground: #f5f5f0;
-  --sidebar-primary: #3b82f6;
-  --sidebar-primary-foreground: #0d0d0d;
-  --sidebar-accent: #374151;
-  --sidebar-accent-foreground: #f5f5f0;
-  --sidebar-border: #272727;
-  --sidebar-ring: #3b82f6;
+  --bg: #0a0a0a;
+  --bg-section-alt: #0f0f0f;
+  --bg-card: #141414;
+  --bg-card-hover: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255,255,255,0.55);
+  --text-muted: rgba(255,255,255,0.25);
+  --text-label: rgba(255,255,255,0.30);
+  --accent: rgba(255,255,255,0.12);
+  --accent-line: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.22);
+  --gradient-text: linear-gradient(160deg, #ffffff 0%, rgba(255,255,255,0.75) 100%);
+  --gradient-section-heading: linear-gradient(180deg, #f0ece6 0%, rgba(240,236,230,0.6) 100%);
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
+html {
+  scroll-behavior: smooth;
+}
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+/* ===========================
+   TYPOGRAPHY SCALE
+   =========================== */
+.section-overline {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.section-title {
+  font-size: clamp(2.75rem, 7vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  background: var(--gradient-section-heading);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-body {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* ===========================
+   SECTION BASE
+   =========================== */
+.section {
+  padding: 128px 0;
+}
+
+.section-alt {
+  background: var(--bg-section-alt);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 80px 0;
   }
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
   }
 }
 
-@keyframes fade-in-left {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+/* ===========================
+   SECTION HEADER PATTERN
+   =========================== */
+.section-header {
+  margin-bottom: 64px;
 }
 
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ===========================
+   DIVIDER LINE
+   =========================== */
+.divider {
+  width: 32px;
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+  margin: 20px 0;
 }
 
-@layer utilities {
-  .animate-fade-in {
-    animation: fade-in 0.6s ease-out;
-  }
-
-  .animate-fade-in-left {
-    animation: fade-in-left 0.6s ease-out;
-  }
-
-  .animate-in {
-    animation: fade-in-up 0.6s ease-out forwards;
-  }
-
-  .scroll-smooth {
-    scroll-behavior: smooth;
-  }
+/* ===========================
+   TAG / PILL CHIPS
+   =========================== */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  cursor: default;
+  white-space: nowrap;
 }
+
+.chip:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.06);
+}
+
+/* ===========================
+   BUTTON: Pill style
+   =========================== */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255,255,255,0.18);
+  background: transparent;
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.btn-pill:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.45);
+}
+
+.btn-pill .arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.btn-pill:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* ===========================
+   SCROLL REVEAL ANIMATIONS
+   =========================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal-stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0ms; }
+.reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 80ms; }
+.reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 160ms; }
+.reveal-stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 240ms; }
+.reveal-stagger.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 320ms; }
+.reveal-stagger.visible > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 400ms; }
+.reveal-stagger.visible > *:nth-child(7) { opacity: 1; transform: none; transition-delay: 480ms; }
+.reveal-stagger.visible > *:nth-child(8) { opacity: 1; transform: none; transition-delay: 560ms; }
+
+/* Delay variants */
+.reveal-d1 { transition-delay: 100ms !important; }
+.reveal-d2 { transition-delay: 200ms !important; }
+.reveal-d3 { transition-delay: 300ms !important; }
+
+/* ===========================
+   CARD BASE
+   =========================== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.card:hover {
+  border-color: rgba(255,255,255,0.12);
+  background: var(--bg-card-hover);
+}
+
+/* ===========================
+   SCROLLBAR
+   =========================== */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }

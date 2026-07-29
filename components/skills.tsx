@@ -1,89 +1,97 @@
 'use client'
 
-interface SkillCategory {
-  name: string
-  items: string[]
-}
+const skillCategories = [
+  {
+    label: 'Languages',
+    items: ['Python', 'C#'],
+  },
+  {
+    label: 'AI / ML',
+    items: ['Machine Learning', 'Generative AI', 'Prompt Engineering', 'RAG', 'Semantic Search', 'Embeddings', 'Multi-Agent Systems', 'MLflow'],
+  },
+  {
+    label: 'AI Frameworks',
+    items: ['PyTorch', 'LangChain', 'LangGraph', 'CrewAI', 'Gemini API', 'ChromaDB', 'FAISS', 'MCP'],
+  },
+  {
+    label: 'Backend',
+    items: ['FastAPI', 'Flask', 'ASP.NET Core', 'Entity Framework Core', 'REST APIs'],
+  },
+  {
+    label: 'Databases',
+    items: ['PostgreSQL', 'MySQL', 'MS SQL Server'],
+  },
+  {
+    label: 'Tools',
+    items: ['Git', 'GitHub', 'Docker', 'Postman', 'VS Code'],
+  },
+]
 
 export default function Skills() {
-  const skillCategories: SkillCategory[] = [
-    {
-      name: 'Programming',
-      items: ['Python', 'C#'],
-    },
-    {
-      name: 'AI & ML',
-      items: [
-        'Machine Learning',
-        'Generative AI',
-        'Prompt Engineering',
-        'RAG Systems',
-        'Semantic Search',
-        'Embeddings',
-        'Multi-Agent Systems',
-      ],
-    },
-    {
-      name: 'Frameworks',
-      items: [
-        'PyTorch',
-        'LangChain',
-        'LangGraph',
-        'CrewAI',
-        'Google Gemini API',
-        'ChromaDB',
-        'FAISS',
-        'MCP',
-      ],
-    },
-    {
-      name: 'Backend',
-      items: [
-        'FastAPI',
-        'Flask',
-        'ASP.NET Core',
-        'Entity Framework Core',
-        'RESTful APIs',
-      ],
-    },
-    {
-      name: 'Databases',
-      items: ['PostgreSQL', 'MySQL', 'Microsoft SQL Server'],
-    },
-    {
-      name: 'Tools & DevOps',
-      items: ['Git', 'GitHub', 'Docker', 'Postman', 'VS Code'],
-    },
-  ]
-
   return (
-    <section className="py-20 md:py-28 px-6 bg-card/30">
-      <div className="max-w-5xl mx-auto">
-        <div data-scroll-animate className="space-y-12">
-          <div className="space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground">Skills</h2>
-            <div className="w-12 h-1 bg-accent rounded-full"></div>
-          </div>
+    <section
+      id="skills"
+      className="section"
+      style={{ background: 'var(--bg)' }}
+    >
+      <div className="container">
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {skillCategories.map((category) => (
-              <div key={category.name} className="space-y-4">
-                <h3 className="text-lg font-semibold text-foreground">{category.name}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {category.items.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-4 py-2 rounded-full bg-accent/10 text-accent border border-accent/20 text-sm font-medium hover:bg-accent/20 hover:border-accent/40 transition-all duration-300"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+        {/* Section header */}
+        <div className="reveal" style={{ marginBottom: 64 }}>
+          <p className="section-overline" style={{ marginBottom: 18 }}>Expertise</p>
+          <h2 className="section-title">Skills</h2>
+          <div className="divider" />
         </div>
+
+        {/* Skills grid */}
+        <div
+          className="reveal skills-grid"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '48px 64px',
+          }}
+        >
+          {skillCategories.map((cat) => (
+            <div key={cat.label}>
+              <p
+                style={{
+                  fontSize: '0.6875rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  color: 'var(--text-muted)',
+                  marginBottom: 16,
+                }}
+              >
+                {cat.label}
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                {cat.items.map((skill) => (
+                  <span key={skill} className="chip">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
       </div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .skills-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (max-width: 560px) {
+          .skills-grid {
+            grid-template-columns: 1fr !important;
+            gap: 36px !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }
