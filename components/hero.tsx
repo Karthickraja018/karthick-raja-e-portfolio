@@ -101,7 +101,7 @@ export default function Hero() {
             marginBottom: 20,
           }}
         >
-          AI Engineer · Generative AI Specialist
+          AI Engineer · Aspiring GenAI Engineer
         </p>
 
         {/* Name */}

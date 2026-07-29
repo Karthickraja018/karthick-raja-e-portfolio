@@ -119,7 +119,7 @@ export default function Contact() {
               color: 'var(--text-muted)',
             }}
           >
-            AI Engineer · Generative AI Specialist
+            AI Engineer · Aspiring GenAI Engineer
           </p>
         </div>
 
