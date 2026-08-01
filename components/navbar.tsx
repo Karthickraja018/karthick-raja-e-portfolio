@@ -105,7 +105,7 @@ export default function Navbar() {
         className="btn-pill"
         style={{ padding: '8px 18px', fontSize: '0.8125rem' }}
       >
-        Hire Me
+        Let's Talk
       </a>
 
       <style>{`
